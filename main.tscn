@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://onf2hd2xpe8o"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ehtio"]
+[ext_resource type="Texture2D" uid="uid://c7j8rx20f2wmc" path="res://sky.jpg" id="2_xwc8k"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_77yx8"]
+panorama = ExtResource("2_xwc8k")
+
+[sub_resource type="Sky" id="Sky_a6c5v"]
+sky_material = SubResource("PanoramaSkyMaterial_77yx8")
+
+[sub_resource type="Environment" id="Environment_2hg2e"]
+background_mode = 2
+sky = SubResource("Sky_a6c5v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgu53"]
+albedo_color = Color(1, 0.0156863, 1, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_br60n"]
+material = SubResource("StandardMaterial3D_lgu53")
+text = "asdfasdfasdfasdf"
+
+[sub_resource type="TorusMesh" id="TorusMesh_f0oqp"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ehtio")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2hg2e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.766044, 0.642788, 4.90904e-08, -0.13451, -0.160303, 0.97786, 0.628556, 0.749084, 0.20926, 0, 1.72502, 2.96032)
+light_color = Color(1, 0.772549, 0, 1)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="TextMeshInstance" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("TextMesh_br60n")
+
+[node name="CameraPivot" type="Marker3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.24933, -0.502914)
+light_color = Color(0.927237, 0.696717, 0.563982, 1)
+
+[node name="Logo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57278, 0)
+mesh = SubResource("TorusMesh_f0oqp")
