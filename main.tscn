@@ -1,24 +1,45 @@
-[gd_scene load_steps=9 format=3 uid="uid://onf2hd2xpe8o"]
+[gd_scene load_steps=13 format=3 uid="uid://onf2hd2xpe8o"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ehtio"]
-[ext_resource type="Texture2D" uid="uid://c7j8rx20f2wmc" path="res://sky.jpg" id="2_xwc8k"]
+[ext_resource type="Texture2D" uid="uid://0j3mbcqbf8o7" path="res://free_star_sky_hdri_spherical_map_by_kirriaa_dbw8p0w.jpg" id="2_o2n6f"]
+[ext_resource type="PackedScene" uid="uid://f33dj3p37pq3" path="res://logos/manjaro.blend" id="3_tigkl"]
+[ext_resource type="PackedScene" uid="uid://biijnj8dq5h6a" path="res://logos/ubuntu.blend" id="4_hubcb"]
+[ext_resource type="PackedScene" uid="uid://dbjy18fy012ga" path="res://logos/tux/scene.gltf" id="5_miigh"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_77yx8"]
-panorama = ExtResource("2_xwc8k")
+panorama = ExtResource("2_o2n6f")
 
 [sub_resource type="Sky" id="Sky_a6c5v"]
 sky_material = SubResource("PanoramaSkyMaterial_77yx8")
+radiance_size = 6
 
 [sub_resource type="Environment" id="Environment_2hg2e"]
 background_mode = 2
+background_energy_multiplier = 2.0
 sky = SubResource("Sky_a6c5v")
+reflected_light_source = 2
+
+[sub_resource type="SystemFont" id="SystemFont_6np5u"]
+font_names = PackedStringArray("Courier New")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgu53"]
 albedo_color = Color(1, 0.0156863, 1, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_br60n"]
 material = SubResource("StandardMaterial3D_lgu53")
-text = "asdfasdfasdfasdf"
+text = "fooooooooooooooo
+fooooooooooooooo
+fooooooooooooooo
+fooooooooooooooo
+fooooooooooooooo
+fooooooooooooooo
+"
+font = SubResource("SystemFont_6np5u")
+font_size = 18
+horizontal_alignment = 0
+vertical_alignment = 2
+curve_step = 0.1
+depth = 0.1
 
 [sub_resource type="TorusMesh" id="TorusMesh_f0oqp"]
 
@@ -34,11 +55,25 @@ light_color = Color(1, 0.772549, 0, 1)
 light_energy = 0.9
 shadow_enabled = true
 
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.889759, -2.65169e-08, -0.45643, 0.166081, 0.93145, 0.323756, 0.425142, -0.363869, 0.828766, -5.1137, 1.9402, 3.02947)
+light_energy = 16.0
+light_specular = 1.0
+spot_angle = 35.1288
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.866025, 0, 0.5, -0.23147, 0.886389, 0.400918, -0.443195, -0.46294, 0.767636, 1.89006, 3.63384, 6)
+light_color = Color(1, 1, 0, 1)
+light_energy = 10.0
+spot_range = 8.0
+spot_angle = 14.2334
+
 [node name="TextMeshInstance" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.196481, 0)
 mesh = SubResource("TextMesh_br60n")
 
 [node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48757, 0.112204, 0.0226642)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
@@ -49,4 +84,19 @@ light_color = Color(0.927237, 0.696717, 0.563982, 1)
 
 [node name="Logo" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57278, 0)
+visible = false
 mesh = SubResource("TorusMesh_f0oqp")
+
+[node name="Logos" type="Node" parent="."]
+
+[node name="manjaro" parent="Logos" instance=ExtResource("3_tigkl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 1.07599, 0)
+visible = false
+
+[node name="ubuntu" parent="Logos" instance=ExtResource("4_hubcb")]
+transform = Transform3D(-0.866025, -8.15666e-08, -0.5, -0.5, -2.18557e-08, 0.866025, -8.15666e-08, 1, -2.18557e-08, -1.7, 1.64444, 0)
+visible = false
+
+[node name="tux" parent="Logos" instance=ExtResource("5_miigh")]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -1.7, 0, 0)
+visible = false
